@@ -1,0 +1,188 @@
+CREATE TABLE Members(
+Member_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+Email varchar(50) not null,
+Password varchar(20) not null,
+LastName varchar(50),
+FirstName varchar(50),
+B_day INTEGER,
+B_month varchar(5),
+B_year INTEGER,
+Gender varchar(10),
+Phone varchar(20),
+primary key(member_ID),
+UNIQUE (Email),
+foreign key(member_id) references Members(member_id)
+);
+
+
+Create table payment(
+payment_id int not null generated ALWAYS AS IDENTITY (start with 1, INCREMENT BY 1),
+Member_ID int not null,
+card_number numeric(16) not null,
+card_type varchar(20) not null,
+security_code numeric(3) not null,
+primary key(payment_id)
+) ;
+
+Create table product(
+product_id int not null generated ALWAYS AS IDENTITY (start with 1, INCREMENT BY 1),
+product_name varchar(30) not null, 
+product_type varchar(20) not null,
+detail varchar(225) not null,
+color varchar(20),
+price decimal(5,2) not null,
+product_pic varchar (50) not null,
+product_alt varchar(50),
+primary key(product_id)
+);
+
+Create table productstock(
+product_id int not null,
+product_size varchar(4) not null,
+stock int  not null,
+primary key(product_id, product_size),
+foreign key (product_id) references product(product_id)
+);
+
+Create table shipping(
+ship_id int not null generated ALWAYS AS IDENTITY (start with 1, INCREMENT BY 1),
+Member_ID int not null,
+s_lastname varchar(50) not null,
+s_firstname varchar(50) not null,
+Line1 varchar(255) not null,
+Line2 varchar(255) not null,
+City varchar(50) not null,
+State varchar(50) not null,
+postalCode numeric(5) not null,
+Country varchar(50) not null,
+primary key(ship_id),
+foreign key(member_id) references Members(member_id)
+);
+
+CREATE TABLE orders(
+order_id int not null generated ALWAYS AS IDENTITY (start with 1, INCREMENT BY 1),
+Member_ID int not null,
+ship_id int not null,
+payment_id int not null,
+totalprice decimal(5,2) not null,
+order_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+foreign key (ship_id)references shipping(ship_id),
+foreign key (payment_id)references payment(payment_id),
+foreign key (Member_ID) references Members(Member_ID),
+primary key(order_id)
+);
+
+Create table orderdetail(
+orderdetail_id int not null generated ALWAYS AS IDENTITY (start with 1, INCREMENT BY 1),
+order_id int not null,
+product_id int not null,
+size varchar(4) not null,
+quantity int not null,
+foreign key(product_id) references product(product_id),
+foreign key(order_id) references orders(order_id),
+foreign key(product_id, size) references productstock(product_id, product_size),
+primary key(orderdetail_id)
+);
+
+Create table looks(
+looks_id int not null generated ALWAYS AS IDENTITY (start with 1, INCREMENT BY 1),
+looks_pic varchar(50) not null,
+looks_alt varchar(50) not null,
+primary key(looks_id)
+);
+
+Create table looksdetail(
+looksdetail_id int not null generated ALWAYS AS IDENTITY (start with 1, INCREMENT BY 1),
+looks_id int not null,
+product_id int not null,
+primary key (looksdetail_id),
+foreign key (looks_id)references looks(looks_id),
+foreign key (product_id) references product(product_id)
+);
+
+-- look data
+
+insert into looks(looks_pic, looks_alt) VALUES ('pic/product/Look_1.jpg','1 look');
+insert into looks(looks_pic, looks_alt) VALUES ('pic/product/Look_2.jpg','2 look');
+insert into looks(looks_pic, looks_alt) VALUES ('pic/product/Look_3.jpg','3 look');
+insert into looks(looks_pic, looks_alt) VALUES ('pic/product/Look_4.jpg','4 look');
+insert into looks(looks_pic, looks_alt) VALUES ('pic/product/Look_5.jpg','5 look');
+insert into looks(looks_pic, looks_alt) VALUES ('pic/product/Look_6.jpg','6 look');
+insert into looks(looks_pic, looks_alt) VALUES ('pic/product/Look_7.jpg','7 look');
+
+
+
+--product data
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Black sneakers', 'shoes', 'this is a pair of black sneakers','black',54.99,'pic/product/shoes_1.jpg','black sneakers');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Blue sneakers', 'shoes', 'this is a pair of blue sneakers','blue',54.99,'pic/product/shoes_2.jpg','blue sneakers');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('White sneakers', 'shoes', 'this is a pair of white sneakers','white',54.99,'pic/product/shoes_3.jpg','white sneakers');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Brown sneakers', 'shoes', 'this is a pair of brown sneakers','brown',54.99,'pic/product/shoes_4.jpg','brown sneakers');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Green sneakers', 'shoes', 'this is a pair of green sneakers','green',54.99,'pic/product/shoes_5.jpg','green sneakers');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Grey sneakers', 'shoes', 'this is a pair of grey sneakers','grey',54.99,'pic/product/shoes_4.jpg','grey sneakers');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Yellow sneakers', 'shoes', 'this is a pair of yellow sneakers','yellow',54.99,'pic/product/shoes_4.jpg','yellow sneakers');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Black short', 'bottom', 'this is a pair of brown short','brown',35.99,'pic/product/short_1.jpg','brown short');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Blue short', 'bottom', 'this is a pair of red short','red',35.99,'pic/product/short_2.jpg','red short');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('White short', 'bottom', 'this is a pair of green short','green',35.99,'pic/product/short_.jpg3','green short');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Brown short', 'bottom', 'this is a pair of brown short','brown',35.99,'pic/product/short_4.jpg','brown short');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Green short', 'bottom', 'this is a pair of red short','red',35.99,'pic/product/short_5.jpg','red short');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Grey short', 'bottom', 'this is a pair of green short','grey',35.99,'pic/product/short_6.jpg','grey short');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Yellow short', 'bottom', 'this is a pair of green short','green',35.99,'pic/product/short_7.jpg','green short');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Black Tee', 'top', 'this is a black tee','black',24.99,'pic/product/top_1.jpg','black tee');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Blue shirt', 'top', 'this is a blue shirt','blue',24.99,'pic/product/top_2.jpg','blue shirt');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Solid Twill Shirt', 'top', 'this is a white shirt','white',24.99,'pic/product/top_3.jpg','white shirt');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Brown shirt', 'top', 'this is a pink shirt','pink',24.99,'pic/product/top_4.jpg','pink shirt');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Green shirt', 'top', 'this is a green shirt','green',24.99,'pic/product/top_5.jpg','green shirt');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Grey shirt', 'top', 'this is a grey shirt','grey',24.99,'pic/product/top_6.jpg','grey shirt');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Yellow tee', 'top', 'this is a yellow tee','yellow',24.99,'pic/product/top_7.jpg','yellow tee');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Quilted Barracuda Jacket','outware', 'Quilted Barracuda Jacket','black',24.99,'pic/product/out_1.jpg','Quilted Barracuda Jacket');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Blue jacket', 'outware', 'this is a blue jacket','blue',24.99,'pic/product/out_2.jpg','blue jacket');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('White jacket', 'outware', 'this is a white jacket','white',24.99,'pic/product/out_3.jpg','white jacket');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Brown jacket', 'outware', 'this is a brown jacket','brown',24.99,'pic/product/out_4.jpg','brown jacket');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Green jacket', 'outware', 'this is a green jacket','green',24.99,'pic/product/out_5.jpg','green jacket');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Grey jacket', 'outware', 'this is a grey jacket','grey',24.99,'pic/product/out_6.jpg','grey jacket');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Yellow jacket', 'outware', 'this is a yellow jacket','yellow',24.99,'pic/product/out_7.jpg','yellow jacket');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('White hat','Accessories', 'Stussy Speckled Snapback Cap','white',24.99,'pic/product/ass_1.jpg','white hat');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Smart Belt','Accessories', 'ASOS Smart Belt In Tan Faux Leather With Contrast Internal','brown',24.99,'pic/product/ass_2.jpg','belt');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Straw hat','Accessories', 'ASOS Straw Hat In Two Tone','Beige',24.99,'pic/product/ass_3.jpg','straw hat');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Plaited Belt','Accessories', 'ASOS Plaited Belt In Black Faux Leather','black',24.99,'pic/product/ass_4.jpg','Plaited Belt');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Portfolio Bag','Accessories', 'Paul Smith Pebble Emboss Portfolio Bag','black',24.99,'pic/product/ass_5.jpg','Portfolio Bag');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Pocket Square','Accessories', 'ASOS Pocket Square in Pastel','pastel',24.99,'pic/product/ass_6.jpg','Pocket Square');
+insert into product(product_name, product_type ,detail ,color ,price , product_pic, product_alt) VALUES ('Trucker Cap','Accessories', 'ASOS Trucker Cap In Black With Check print','black',24.99,'pic/product/ass_7.jpg','Trucker Cap');
+
+-- looksdetail data  Not working
+
+insert into looksdetail(looks_id, product_id) VALUES (1, 1);
+insert into looksdetail(looks_id, product_id) VALUES (2, 2);
+insert into looksdetail(looks_id, product_id) VALUES (3, 3);
+insert into looksdetail(looks_id, product_id) VALUES (4, 4);
+insert into looksdetail(looks_id, product_id) VALUES (5, 5);
+insert into looksdetail(looks_id, product_id) VALUES (6, 6);
+insert into looksdetail(looks_id, product_id) VALUES (7, 7);
+insert into looksdetail(looks_id, product_id) VALUES (1, 8);
+insert into looksdetail(looks_id, product_id) VALUES (2, 9);
+insert into looksdetail(looks_id, product_id) VALUES (3, 10);
+insert into looksdetail(looks_id, product_id) VALUES (4, 11);
+insert into looksdetail(looks_id, product_id) VALUES (5, 12);
+insert into looksdetail(looks_id, product_id) VALUES (6, 13);
+insert into looksdetail(looks_id, product_id) VALUES (7, 14);
+insert into looksdetail(looks_id, product_id) VALUES (1, 15);
+insert into looksdetail(looks_id, product_id) VALUES (2, 16);
+insert into looksdetail(looks_id, product_id) VALUES (3, 17);
+insert into looksdetail(looks_id, product_id) VALUES (4, 18);
+insert into looksdetail(looks_id, product_id) VALUES (5, 19);
+insert into looksdetail(looks_id, product_id) VALUES (6, 20);
+insert into looksdetail(looks_id, product_id) VALUES (7, 21);
+insert into looksdetail(looks_id, product_id) VALUES (1, 22);
+insert into looksdetail(looks_id, product_id) VALUES (2, 23);
+insert into looksdetail(looks_id, product_id) VALUES (3, 24);
+insert into looksdetail(looks_id, product_id) VALUES (4, 25);
+insert into looksdetail(looks_id, product_id) VALUES (5, 26);
+insert into looksdetail(looks_id, product_id) VALUES (6, 27);
+insert into looksdetail(looks_id, product_id) VALUES (7, 28);
+insert into looksdetail(looks_id, product_id) VALUES (1, 29);
+insert into looksdetail(looks_id, product_id) VALUES (2, 30);
+insert into looksdetail(looks_id, product_id) VALUES (3, 31);
+insert into looksdetail(looks_id, product_id) VALUES (4, 32);
+insert into looksdetail(looks_id, product_id) VALUES (5, 33);
+insert into looksdetail(looks_id, product_id) VALUES (6, 34);
+insert into looksdetail(looks_id, product_id) VALUES (7, 35);

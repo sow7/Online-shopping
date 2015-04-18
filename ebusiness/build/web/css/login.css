@@ -1,0 +1,12 @@
+.area{
+	border-radius: 10px;
+	width:600px;
+ 	text-align: left;
+	background-color: lightblue;
+	text-align: center;
+	margin: auto;
+}
+.container{
+	text-align: center;
+
+}

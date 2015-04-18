@@ -1,0 +1,12 @@
+
+.product{
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 15px;
+  margin-left: 5%;
+  background-color: lightblue;
+}
+.pdc-pic{
+  margin-top:10px;
+  margin-bottom:10px;
+}

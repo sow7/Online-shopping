@@ -1,0 +1,17 @@
+.panel-title{
+	text-align: center;
+}
+.table{
+	
+	border-top:  1px solid #ddd;
+	border-bottom:  1px solid #ddd;
+	border-radius: 5px;
+}
+
+.title{
+	text-align: right;
+	font-weight: bold;
+}
+.text{
+	padding-left: 10px;
+}

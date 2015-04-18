@@ -1,0 +1,10 @@
+.panel-collapse{
+	height:300px;
+}
+.off{
+	position: relative;
+	top:50px;
+}
+.off > img{
+	height:50px;
+}

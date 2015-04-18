@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Strongbility Man-Login</title>        
+        <script src="js/jquery-1.11.2.min.js"></script>
+        <script src="js/jquery.validate.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/normalize.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/login.css" rel="stylesheet">
+        <script src="js/ie-emulation-modes-warning.js"></script>
+        <script type="text/javascript">
+            $().ready(function () {
+                $("#form1").validate({
+                    rules: {
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        password: {
+                            required: true,
+                            minlength: 5
+                        },
+                        confirmPassword: {
+                            required: true,
+                            minlength: 5,
+                            equalTo: "#password"
+                        }
+                    }
+                });
+                $("#form2").validate({
+                    rules: {
+                        email1: {
+                            required: true,
+                            email: true
+                        },
+                        password1: {
+                            required: true
+                        }
+                    }
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="wrap">
+            <!--header-->
+            <div class="navbar navbar-fixed-top">
+                <div class="container">
+                    <div class=" navbar-fixed-top navbar-inverse">
+                        <div class="navbar-inner">
+                            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </a>
+                            <div class="nav-collapse">
+                                <ul class="nav">
+                                    <li class="active down"><a href="Looks.jsp">LOOKS</a></li>
+                                    <li ><a class="logo" href="index.jsp" ><img src="pic/icon/Logo.png" alt="Strongbility" height=65 ></a></li>
+                                    <li class="down"><a href="Top.jsp" >CATEGORY</a></li>
+                                </ul>
+                            </div><!--/.nav-collapse -->
+                        </div><!-- /.navbar-inner -->
+                    </div><!-- /.navbar-inverse-->
+                </div><!-- /.container -->   
+            </div><!--  navbar navbar-fixed-top -->
+            <div class="sidnav">
+                <div class="row">
+                    <div class="btn-group pull-right subnav">
+                        <a href="Cart.jsp"><button class="btn"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge badge-info"></span></button></a>
+                        <a href="Signin.html"><button class="btn">Sign in</button></a>
+                    </div><!--  btn-group -->
+                </div><!--/.row-->
+            </div><!--/.sidnav-->
+            <!--content-->
+            <div class="content">
+                <div class="container">
+                    <div class="area">
+                        <div class="row ">
+                            <div class="col-md-5 col-md-offset-1  signup text-left">
+                                <h3 class="text-info">Not a member?</h3>
+                                <h6 class="text-default">Sign up now</h6>
+                                <form id='form1' class="form" action="Register" method="post">
+                                    <div>
+                                        <label for="inputEmail" class="text-left">Email</label>
+                                        <div>
+                                            <input type="email" name="email" id='email' placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="inputPassword" class="text-left">Password</label>
+                                        <div>
+                                            <input type="password" name="password" id='password' placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="inputPassword" class="text-left">Confirm Password</label>
+                                        <div>
+                                            <input type="password" name="confirmPassword" id='confirmPassword' placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="btn">Sign up</button>
+                                    </div>
+                                </form>
+                            </div><!--/.col-sm-3-->
+                            <div class="col-md-5 col-md-offset-1 singin text-left">
+                                <h3 class="text-info" class="text-left">Already a Member?</h3>
+                                <h6 class="info">Sign in here</h6>
+                                <form id='form2' class="form" action="Signin" method='post'>
+                                    <div>
+                                        <label for="inputEmail" class="text-left">Email</label>
+                                        <div>
+                                            <input type="text" name="email1" id='email1' placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="inputPassword" class="text-left">Password</label>
+                                        <div>
+                                            <input type="password" name="password1" id='password1' placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <p></p>
+                                    <div>
+                                        <button type="submit" class="btn">Sign in</button>
+                                    </div>
+                                </form>
+                            </div><!--/.col-sm-3-->
+                        </div><!--/.row-->
+                    </div><!--/.area-->
+                </div><!--/.container-->
+            </div><!--/.content-->
+        </div><!--/.warp-->
+        <!--footer-->
+        <div id="footer">
+            <div class="container">
+                <p class="text-muted">Copyright 2015</p>
+            </div>
+        </div><!--/.footer-->
+    </body>
+</html>
+

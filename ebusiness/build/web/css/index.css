@@ -1,0 +1,20 @@
+.hero-unit {
+padding-top: 35px;/* CHANGE PADDING HERE*/
+padding-bottom: 50px;
+text-align: center;
+margin-bottom: 10px; 
+font-size: 18px;
+font-weight: 200;
+line-height: 30px;
+color: inherit;
+background-color: transparent; /* CHANGE BACKGROUND HERE*/
+-webkit-border-radius: 6px;
+-moz-border-radius: 6px;
+border-radius: 6px;
+}
+.off{
+	position: inherit;
+	top: 30px;
+	left: 90px;
+	text-align: center;	
+}
